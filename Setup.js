@@ -24,6 +24,7 @@ export function RegisterControllers(router) {
       let controllerClass = fileHandler[controllerName.slice(0, -3)];
       let controller = new controllerClass();
       if (controller instanceof BaseController) {
+        console.log(controller.mount, controller.router)
         router.use(controller.mount, controller.router);
       }
     } catch (e) {

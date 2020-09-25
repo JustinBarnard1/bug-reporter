@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 
-const bug = new Schema({
+const Bug = new Schema({
     closed: { type: Boolean, required: true, default: false },
     description: { type: String, required: true },
     title: { type: String, required: true },
@@ -9,11 +10,11 @@ const bug = new Schema({
     creatorEmail: { type: String, required: true }
 }, { timestamps: true, toJSON: { virtuals: true } })
 
-Value.virtual("creator", {
+Bug.virtual("creator", {
     localField: "creatorEmail",
     ref: "Profile",
     foreignField: "email",
     justOne: true
 });
 
-export default bug
+export default Bug;
