@@ -52,7 +52,7 @@ export default new Vuex.Store({
           commit('setBugs', res.data)
         })
     },
-    getBugByID({ commit }, id) {
+    getBugById({ commit }, id) {
       api.get('bugs/' + id)
         .then(res => {
           commit('setActive', res.data)
@@ -71,7 +71,7 @@ export default new Vuex.Store({
     getNotes({ commit }, id) {
       api.get("bugs/" + id + "/notes")
         .then(res => {
-          commit('setNotes', { data: res.data, id })
+          commit('setNotes', { data: res.data })
         })
     },
     addNote({ dispatch }, note) {

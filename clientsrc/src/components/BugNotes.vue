@@ -1,18 +1,14 @@
 <template>
-  <div class="mx-2 mb-2">
-    <li class="offset-1 card">
-      <p
-        class="d-flex justify-content-left p-2"
-        v-if="!editing"
-        @click="editBody"
-      >
-        {{ noteProp.body }}
-      </p>
+  <div>
+    <div class="col d-flex justify-content-center">
+      <h1 class="bg-dark text-light">
+        should be here
+        {{ noteProp.content }}
+      </h1>
       <form @submit.prevent="editFinish" v-if="editing" class="form-inline">
         <div class="form-group">
           <input
-            style="max-width: 13em"
-            v-model="note.body"
+            v-model="noteProp.content"
             type="text"
             name
             class="form-control"
@@ -25,7 +21,7 @@
           <i class="ml-3 text-danger" @click="deleteNote">Delete</i>
         </small>
       </form>
-    </li>
+    </div>
   </div>
 </template>
 

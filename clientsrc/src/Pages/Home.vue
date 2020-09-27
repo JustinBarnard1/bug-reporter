@@ -35,7 +35,7 @@
       </thead>
       <tbody v-for="bug in bugs" :key="bug.id">
         <tr>
-          <router-link :to="{ name: 'details', params: { bugId: bug.id } }">
+          <router-link :to="{ name: 'BugDetails', params: { bugId: bug.id } }">
             <th class="my-0" scope="row">{{ bug.title }}</th>
           </router-link>
           <td>{{ bug.creatorEmail }}</td>

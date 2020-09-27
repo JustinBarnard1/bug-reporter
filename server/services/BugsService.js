@@ -1,5 +1,4 @@
 import { dbContext } from "../db/DbContext"
-import Bug from "../models/Bug"
 import { BadRequest } from "../utils/Errors"
 
 class BugsService {

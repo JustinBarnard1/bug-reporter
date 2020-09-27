@@ -1,7 +1,7 @@
 import BaseController from "../utils/BaseController";
 import auth0provider from "@bcwdev/auth0provider";
 import { bugsService } from "../services/BugsService";
-// import { notesService } from "../services/NotesService";
+import { notesService } from "../services/NotesService";
 
 export class BugsController extends BaseController {
     constructor() {
@@ -10,6 +10,7 @@ export class BugsController extends BaseController {
             .get('', this.getAll)
             .use(auth0provider.getAuthorizedUserInfo)
             .get('/:id', this.getById)
+            .get('/:id/notes', this.getNotes)
             .post('', this.create)
             .put('/:id', this.edit)
             .delete('/:id', this.delete)
@@ -30,14 +31,14 @@ export class BugsController extends BaseController {
             next(error)
         }
     }
-    // async getNotes(req, res, next) {
-    //     try {
-    //         let data = await notesService.getAll(req.params.id)
-    //         return res.send(data)
-    //     } catch (error) {
-    //         next(error)
-    //     }
-    // }
+    async getNotes(req, res, next) {
+        try {
+            let data = await notesService.getAllNotes(req.params.id)
+            return res.send(data)
+        } catch (error) {
+            next(error)
+        }
+    }
     async create(req, res, next) {
         try {
             req.body.creatorEmail = req.userInfo.email

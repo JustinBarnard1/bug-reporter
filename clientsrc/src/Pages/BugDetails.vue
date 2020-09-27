@@ -1,9 +1,24 @@
-<template></template>
+<template>
+  <div>
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">{{ bug.title }}</h5>
+        <p class="card-text">{{ bug.description }}</p>
+      </div>
+      <button @click="logg" type="button" class="btn btn-primary">
+        click here
+      </button>
+    </div>
+    <div>
+      <notes v-for="note in bugNotes" :key="note.id" :noteProp="note" />
+    </div>
+  </div>
+</template>
 
 <script>
-import Note from "../components/Notes";
+import Notes from "../components/BugNotes";
 export default {
-  name: "details",
+  name: "bugdetails",
   data() {
     return {
       newNote: {},
@@ -13,7 +28,7 @@ export default {
     bug() {
       return this.$store.state.activeBug;
     },
-    notes() {
+    bugNotes() {
       return this.$store.state.notes;
     },
     user() {
@@ -42,6 +57,9 @@ export default {
       this.$store.dispatch("editBug", {
         id: this.bug,
       });
+    },
+    logg() {
+      console.log(notes);
     },
   },
   components: {

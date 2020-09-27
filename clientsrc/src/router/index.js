@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Details from "../Pages/Details";
+import BugDetails from "../Pages/BugDetails";
 // @ts-ignore
 import Home from "../Pages/Home.vue";
 // @ts-ignore
@@ -22,9 +22,9 @@ const routes = [
     beforeEnter: authGuard,
   },
   {
-    path: "/details",
-    name: "Details",
-    component: Details,
+    path: "/bugs/:bugId",
+    name: "BugDetails",
+    component: BugDetails,
     beforeEnter: authGuard,
   },
 ];
