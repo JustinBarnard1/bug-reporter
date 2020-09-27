@@ -5,10 +5,9 @@
         <h5 class="card-title">{{ bug.title }}</h5>
         <p class="card-text">{{ bug.description }}</p>
       </div>
-      <button @click="logg" type="button" class="btn btn-primary">
-        click here
-      </button>
+      <button type="button" class="btn btn-primary">click here</button>
     </div>
+    <div></div>
     <div>
       <notes v-for="note in bugNotes" :key="note.id" :noteProp="note" />
     </div>
@@ -24,6 +23,10 @@ export default {
       newNote: {},
     };
   },
+  mounted() {
+    this.$store.dispatch("getBugById", this.$route.params.bugId);
+    this.$store.dispatch("getNotes", this.$route.params.bugId);
+  },
   computed: {
     bug() {
       return this.$store.state.activeBug;
@@ -34,10 +37,6 @@ export default {
     user() {
       return this.$auth.userInfo.email;
     },
-  },
-  mounted() {
-    this.$store.dispatch("getBugById", this.$route.params.bugId);
-    this.$store.dispatch("getNotes", this.$route.params.bugId);
   },
   methods: {
     addNote() {
@@ -57,9 +56,6 @@ export default {
       this.$store.dispatch("editBug", {
         id: this.bug,
       });
-    },
-    logg() {
-      console.log(notes);
     },
   },
   components: {

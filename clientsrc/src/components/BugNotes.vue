@@ -4,23 +4,11 @@
       <h1 class="bg-dark text-light">
         should be here
         {{ noteProp.content }}
+        {{ noteProp.bugId }}
+        {{ noteProp.flagged }}
       </h1>
-      <form @submit.prevent="editFinish" v-if="editing" class="form-inline">
-        <div class="form-group">
-          <input
-            v-model="noteProp.content"
-            type="text"
-            name
-            class="form-control"
-            placeholder
-            aria-describedby="helpId"
-          />
-        </div>
-        <button type="submit" class="btn btn-success">Done</button>
-        <small>
-          <i class="ml-3 text-danger" @click="deleteNote">Delete</i>
-        </small>
-      </form>
+
+      <button @click="logg" type="button" class="btn btn-primary"></button>
     </div>
   </div>
 </template>
@@ -45,6 +33,9 @@ export default {
     editFinish() {
       this.$store.dispatch("editNote", this.note);
       this.editing = false;
+    },
+    logg() {
+      console.log(this.$store.state.notes);
     },
   },
 };

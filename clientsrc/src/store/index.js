@@ -11,7 +11,7 @@ export default new Vuex.Store({
   state: {
     profile: {},
     bugs: [],
-    notes: [],
+    notes: {},
     activeBug: {},
   },
   mutations: {
