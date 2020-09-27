@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Details from "../Pages/Details";
 // @ts-ignore
 import Home from "../Pages/Home.vue";
 // @ts-ignore
@@ -18,6 +19,12 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile,
+    beforeEnter: authGuard,
+  },
+  {
+    path: "/details",
+    name: "Details",
+    component: Details,
     beforeEnter: authGuard,
   },
 ];

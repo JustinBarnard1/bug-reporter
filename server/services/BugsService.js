@@ -1,4 +1,5 @@
 import { dbContext } from "../db/DbContext"
+import Bug from "../models/Bug"
 import { BadRequest } from "../utils/Errors"
 
 class BugsService {
@@ -17,11 +18,20 @@ class BugsService {
         return data
     }
     async edit(id, userEmail, update) {
-        let data = await dbContext.Bugs.findOneAndUpdate({ _id: id, creatorEmail: userEmail }, update, { new: true })
+        let bug = await dbContext.Bugs.findOne({ _id: id })
+        if (!bug.closed) {
+            let data = await dbContext.Bugs.findOneAndUpdate({ _id: id, creatorEmail: userEmail }, update, { new: true })
+            if (!data) {
+                throw new BadRequest("Invalid ID or you do not own this bug report");
+            }
+            return data;
+        } throw new BadRequest("This request is already closed, no changes can be made.")
+    }
+    async delete(id) {
+        let data = await dbContext.Bugs.findByIdAndRemove({ _id: id })
         if (!data) {
-            throw new BadRequest("Invalid ID or you do not own this bug report");
+            throw new BadRequest('Invalid ID')
         }
-        return data;
     }
 }
 export const bugsService = new BugsService()

@@ -1,5 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
+import moment from 'moment'
 import router from "./router";
 import store from "./store";
 import { Auth0Plugin, onAuth } from "@bcwdev/auth0-vue";
@@ -18,10 +19,16 @@ Vue.use(Auth0Plugin, {
   }
 });
 
+Vue.filter('formatDate', function (value) {
+  if (value) {
+    return moment(String(value)).format('MM/DD/YYYY')
+  }
+});
+
 new Vue({
   router,
   store,
-  render: function(h) {
+  render: function (h) {
     return h(App);
   }
 }).$mount("#app");

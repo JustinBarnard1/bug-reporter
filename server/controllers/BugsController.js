@@ -7,11 +7,12 @@ export class BugsController extends BaseController {
     constructor() {
         super("api/bugs")
         this.router
-            .use(auth0provider.getAuthorizedUserInfo)
             .get('', this.getAll)
+            .use(auth0provider.getAuthorizedUserInfo)
             .get('/:id', this.getById)
             .post('', this.create)
             .put('/:id', this.edit)
+            .delete('/:id', this.delete)
     }
     async getAll(req, res, next) {
         try {
@@ -49,5 +50,13 @@ export class BugsController extends BaseController {
             let data = await bugsService.edit(req.params.id, req.userInfo.email, req.body)
             return res.send(data)
         } catch (error) { next(error) }
+    }
+    async delete(req, res, next) {
+        try {
+            await bugsService.delete(req.params.id)
+            return res.send("successfully deleted")
+        } catch (error) {
+            next(error)
+        }
     }
 }
