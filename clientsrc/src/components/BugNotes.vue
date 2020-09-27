@@ -7,6 +7,7 @@
         {{ noteProp.bugId }}
         {{ noteProp.flagged }}
       </h1>
+      <button @click="check" type="button" class="btn btn-primary"></button>
     </div>
   </div>
 </template>
@@ -31,6 +32,9 @@ export default {
     editFinish() {
       this.$store.dispatch("editNote", this.note);
       this.editing = false;
+    },
+    check() {
+      console.log(noteProp);
     },
   },
 };

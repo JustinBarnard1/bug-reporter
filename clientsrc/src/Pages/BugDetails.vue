@@ -11,6 +11,9 @@
     <div>
       <notes v-for="note in notes" :key="note.id" :noteProp="note" />
     </div>
+    <button @click="checker" type="button" class="btn btn-primary">
+      asdfa
+    </button>
   </div>
 </template>
 
@@ -57,10 +60,14 @@ export default {
         id: this.bug,
       });
     },
+    checker() {
+      console.log(notes);
+    },
   },
   components: {
     Notes,
   },
+  props: ["bugId"],
 };
 </script>
 

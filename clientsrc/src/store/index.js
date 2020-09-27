@@ -71,7 +71,7 @@ export default new Vuex.Store({
     getNotes({ commit }, id) {
       api.get("bugs/" + id + "/notes")
         .then(res => {
-          commit('setNotes', { data: res.data })
+          commit("setNotes", res.data)
         })
     },
     addNote({ dispatch }, note) {
