@@ -9,7 +9,7 @@
     </div>
     <div></div>
     <div>
-      <notes v-for="note in bugNotes" :key="note.id" :noteProp="note" />
+      <notes v-for="note in notes" :key="note.id" :noteProp="note" />
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
     bug() {
       return this.$store.state.activeBug;
     },
-    bugNotes() {
+    notes() {
       return this.$store.state.notes;
     },
     user() {
