@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="noOverflow">
     <div class="container-fluid mt-3">
       <p>Title:</p>
       <h1 class="">{{ bug.title }}</h1>
@@ -133,4 +133,7 @@ export default {
 </script>
 
 <style>
+.noOverflow {
+  overflow-x: hidden;
+}
 </style>
