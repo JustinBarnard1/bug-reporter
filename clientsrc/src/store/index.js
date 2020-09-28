@@ -58,11 +58,9 @@ export default new Vuex.Store({
           commit('setActive', res.data)
         })
     },
-    addBug({ dispatch }, bugData) {
-      api.post('bugs', bugData)
-        .then(b => {
-          dispatch('getBugs')
-        })
+    async addBug({ }, bugData) {
+      let res = await api.post('bugs', bugData)
+      router.push({ name: "BugDetails", params: { bugId: res.data.id } })
     },
     editBug({ commit }, bug) {
       api.put(`bugs/${bug.id}`, bug)

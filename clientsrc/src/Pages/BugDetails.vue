@@ -112,12 +112,15 @@ export default {
       this.editing = false;
     },
     markClosed() {
-      let c = confirm(
-        "Are you sure you want to close this? It can not be undone."
-      );
-      if (c == true) {
-        this.bug.closed = true;
-        this.$store.dispatch("editBug", this.bug);
+      if (this.bug.closed == false) {
+        let c = confirm(
+          "Are you sure you want to close this? It can not be undone."
+        );
+        if (c == true) {
+          this.bug.closed = true;
+          this.$store.dispatch("editBug", this.bug);
+        }
+        return;
       }
       return;
     },
