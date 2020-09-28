@@ -19,7 +19,7 @@
         placeholder="Bug Description"
         v-model="newBug.description"
       />
-      <button type="submit" class="btn text-light border">
+      <button type="submit" class="btn text-dark border border-light">
         Create New Bug
       </button>
     </form>
@@ -50,7 +50,7 @@
         </tr>
       </thead>
       <tbody v-for="bug in bugs" :key="bug.id">
-        <tr>
+        <tr v-if="!checked || !bug.closed">
           <router-link :to="{ name: 'BugDetails', params: { bugId: bug.id } }">
             <th class="my-0" scope="row">{{ bug.title }}</th>
           </router-link>
