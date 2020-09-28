@@ -12,7 +12,22 @@
         </div>
       </div>
     </div>
-    <div class="border border-dark mx-3">{{ bug.description }}</div>
+    <p @click="editBody" v-if="!editing" class="border border-dark mx-3">
+      {{ bug.description }}
+    </p>
+    <form @submit.prevent="editFinish" v-if="editing" class="form-inline">
+      <div class="form-group">
+        <input
+          v-model="bug.description"
+          type="text"
+          name
+          class="form-control"
+          placeholder
+          aria-describedby="helpId"
+        />
+      </div>
+      <button type="submit" class="btn btn-success">Done</button>
+    </form>
     <div class="d-flex justify-content-end my-2">
       <button @click="markClosed" type="button" class="btn btn-danger mr-3">
         Close
@@ -36,7 +51,20 @@
       </table>
     </div>
     <div class="container d-flex justify-content-end">
-      <button type="button" class="btn btn-success">Add</button>
+      <form class="form-inline" @submit.prevent="addNote">
+        <div class="form-group">
+          <label for></label>
+          <input
+            v-model="newNote.content"
+            type="text"
+            name
+            class="form-control"
+            placeholder="Note"
+            aria-describedby="helpId"
+          />
+          <button type="submit" class="btn btn-success">Add Note</button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -48,6 +76,7 @@ export default {
   data() {
     return {
       newNote: {},
+      editing: false,
     };
   },
   mounted() {
@@ -72,17 +101,25 @@ export default {
       this.newNote = {};
     },
     editBody() {
-      this.editing = true;
-      this.bug = this.bugId;
+      if (!this.bug.closed == true && this.bug.creatorEmail == this.user) {
+        this.editing = true;
+        this.bug.closedDate = new Date();
+      }
+      return;
     },
     editFinish() {
-      this.$sote.dispatch("editBug", this.bug);
+      this.$store.dispatch("editBug", this.bug);
       this.editing = false;
     },
     markClosed() {
-      this.$store.dispatch("editBug", {
-        id: this.bug,
-      });
+      let c = confirm(
+        "Are you sure you want to close this? It can not be undone."
+      );
+      if (c == true) {
+        this.bug.closed = true;
+        this.$store.dispatch("editBug", this.bug);
+      }
+      return;
     },
   },
   components: {

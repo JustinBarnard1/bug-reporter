@@ -8,9 +8,9 @@ export class BugsController extends BaseController {
         super("api/bugs")
         this.router
             .get('', this.getAll)
-            .use(auth0provider.getAuthorizedUserInfo)
             .get('/:id', this.getById)
             .get('/:id/notes', this.getNotes)
+            .use(auth0provider.getAuthorizedUserInfo)
             .post('', this.create)
             .put('/:id', this.edit)
             .delete('/:id', this.delete)
@@ -25,7 +25,7 @@ export class BugsController extends BaseController {
     }
     async getById(req, res, next) {
         try {
-            let data = await bugsService.getById(req.params.id, req.userInfo.email)
+            let data = await bugsService.getById(req.params.id)
             return res.send(data)
         } catch (error) {
             next(error)
@@ -48,6 +48,7 @@ export class BugsController extends BaseController {
     }
     async edit(req, res, next) {
         try {
+            console.log(req)
             let data = await bugsService.edit(req.params.id, req.userInfo.email, req.body)
             return res.send(data)
         } catch (error) { next(error) }

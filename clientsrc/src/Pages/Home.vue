@@ -32,7 +32,6 @@
       <div class="col d-flex justify-content-end">
         <input
           class="mx-3 mt-1"
-          @change="toggleComplete"
           v-model="checked"
           type="checkbox"
           name
@@ -87,6 +86,7 @@ export default {
         title: "",
         description: "",
       },
+      checked: false,
     };
   },
   computed: {

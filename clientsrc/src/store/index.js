@@ -28,7 +28,7 @@ export default new Vuex.Store({
       state.notes = allNotes
     },
     deleteNote(state, note) {
-      state.notes[note.bugId] = state.notes[note.bugId].filter(n => n.id != note.id)
+      state.notes = state.notes.filter(n => n.id != note.id)
     }
   },
   actions: {
@@ -87,6 +87,7 @@ export default new Vuex.Store({
         })
     },
     editNote({ dispatch }, note) {
+      console.log(note)
       api.put(`notes/${note.id}`, note)
         .then(n => { dispatch("getNotes", note.bugId) })
     }
