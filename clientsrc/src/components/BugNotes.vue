@@ -1,15 +1,9 @@
 <template>
-  <div>
-    <div class="col d-flex justify-content-center">
-      <h1 class="bg-dark text-light">
-        should be here
-        {{ noteProp.content }}
-        {{ noteProp.bugId }}
-        {{ noteProp.flagged }}
-      </h1>
-      <button @click="check" type="button" class="btn btn-primary"></button>
-    </div>
-  </div>
+  <tr>
+    <td class>{{ noteProp.creatorEmail }}</td>
+    <td>{{ noteProp.content }}</td>
+    <td><i class="fa fa-trash" aria-hidden="true"></i></td>
+  </tr>
 </template>
 
 <script>

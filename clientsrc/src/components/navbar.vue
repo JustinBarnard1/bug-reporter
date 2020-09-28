@@ -1,8 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link class="navbar-brand" :to="{ name: 'Home' }"
-      >AppName</router-link
-    >
+    <router-link class="navbar-brand" :to="{ name: 'Home' }">BµgŽ</router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -53,16 +51,16 @@ export default {
   methods: {
     async login() {
       await this.$auth.loginWithPopup();
-      if(this.$auth.isAuthenticated){
+      if (this.$auth.isAuthenticated) {
         this.$store.dispatch("setBearer", this.$auth.bearer);
         this.$store.dispatch("getProfile");
       }
     },
     async logout() {
       this.$store.dispatch("resetBearer");
-      await this.$auth.logout({returnTo: window.location.origin});
-    }
-  }
+      await this.$auth.logout({ returnTo: window.location.origin });
+    },
+  },
 };
 </script>
 

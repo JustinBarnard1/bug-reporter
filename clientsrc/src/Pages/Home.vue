@@ -23,7 +23,24 @@
         Create New Bug
       </button>
     </form>
-    <div class="row"></div>
+    <div class="row mt-2">
+      <div class="col d-flex justify-content-start">
+        <h1>Current Bugs</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col d-flex justify-content-end">
+        <input
+          class="mx-3 mt-1"
+          @change="toggleComplete"
+          v-model="checked"
+          type="checkbox"
+          name
+          autocomplete="off"
+        />
+        <small><p>Hide Closed</p></small>
+      </div>
+    </div>
     <table class="table table-striped">
       <thead>
         <tr>

@@ -1,19 +1,43 @@
 <template>
   <div>
-    <div class="card" style="width: 18rem">
-      <div class="card-body">
-        <h5 class="card-title">{{ bug.title }}</h5>
-        <p class="card-text">{{ bug.description }}</p>
+    <div class="container-fluid mt-3">
+      <p>Title:</p>
+      <h1 class="">{{ bug.title }}</h1>
+      <div class="d-flex justify-content-between">
+        <p class="">Submitted by: {{ bug.creatorEmail }}</p>
+        <div class="d-flex">
+          <small><p class="mr-3 pt-1">Status:</p></small>
+          <p v-if="!bug.closed" class="text-success">Open</p>
+          <p v-else class="text-danger">Closed</p>
+        </div>
       </div>
-      <button type="button" class="btn btn-primary">click here</button>
     </div>
-    <div></div>
-    <div>
-      <notes v-for="note in notes" :key="note.id" :noteProp="note" />
+    <div class="border border-dark mx-3">{{ bug.description }}</div>
+    <div class="d-flex justify-content-end my-2">
+      <button @click="markClosed" type="button" class="btn btn-danger mr-3">
+        Close
+      </button>
     </div>
-    <button @click="checker" type="button" class="btn btn-primary">
-      asdfa
-    </button>
+    <div class="container-fluid">
+      <h2>Notes</h2>
+    </div>
+    <div class="mx-5">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col-3">Name</th>
+            <th class="col-7">Message</th>
+            <th class="col-2">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <notes v-for="note in notes" :key="note.id" :noteProp="note" />
+        </tbody>
+      </table>
+    </div>
+    <div class="container d-flex justify-content-end">
+      <button type="button" class="btn btn-success">Add</button>
+    </div>
   </div>
 </template>
 
@@ -59,9 +83,6 @@ export default {
       this.$store.dispatch("editBug", {
         id: this.bug,
       });
-    },
-    checker() {
-      console.log(notes);
     },
   },
   components: {
