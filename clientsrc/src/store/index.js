@@ -87,7 +87,6 @@ export default new Vuex.Store({
         })
     },
     editNote({ dispatch }, note) {
-      console.log(note)
       api.put(`notes/${note.id}`, note)
         .then(n => { dispatch("getNotes", note.bugId) })
     }
