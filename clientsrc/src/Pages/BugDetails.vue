@@ -24,10 +24,10 @@
     <div class="mx-5">
       <table class="table">
         <thead>
-          <tr>
-            <th class="col-3">Name</th>
-            <th class="col-7">Message</th>
-            <th class="col-2">Delete</th>
+          <tr class="d-flex">
+            <th scoped="col" class="col-3">Name</th>
+            <th scoped="col" class="col-8">Message</th>
+            <th scoped="col" class="col-2">Delete</th>
           </tr>
         </thead>
         <tbody>
